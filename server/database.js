@@ -12,7 +12,7 @@ module.exports.populateDatabase = async docs => {
                     if (err) throw err;
                     console.log("Number of documents inserted: " + res.insertedCount);
                     db.close();
-                    success();
+                    success("Number of documents inserted: " + res.insertedCount);
                 });
             }
             catch (e) {
