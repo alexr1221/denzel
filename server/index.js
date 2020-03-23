@@ -35,8 +35,10 @@ app.get('/movies/populate', async (request, response) => {
         //      console.log(JSON.stringify(movies, null, 2));
         //    console.log(`🥇 ${awesome.length} awesome movies found.`);
         //    console.log(JSON.stringify(awesome, null, 2));
+        response.send("operation completed");
     } catch (e) {
         console.error(e);
+        response.send("an error occured");
     }
 });
 
