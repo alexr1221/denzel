@@ -17,5 +17,9 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
+app.get('/movies/populate', (request, response) => {
+    
+});
+
 app.listen(PORT);
 console.log(`📡 Running on port ${PORT}`);
