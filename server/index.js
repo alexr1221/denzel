@@ -58,18 +58,40 @@ app.get('/movies', async (request, response) => {
 });
 
 app.get('/movies/:id', async (request, response) => {
-    var metascore = 70;
     var requestParam = request.params.id;
     try {
-        console.log(`📽️  fetching random must-watch movie...`);
-        const movies = await database.getMovies([requestParam]);
+        if (requestParam === "search") {
+            await searchEndpoint(request, response);
+        }
+        else {
+            console.log(`📽️  searching for specific movie...`);
+            const movies = await database.getMovies([requestParam]);
+            console.log("operation completed");
+            response.send(JSON.stringify(movies, null, 2));
+        }
+    } catch (e) {
+        console.error(e);
+        response.send("an error occured");
+    }
+});
+
+app.get('/movies/search', async (request, response) => {
+    await searchEndpoint(request, response);
+});
+
+async function searchEndpoint(request, response) {
+    var limitParam = request.query["limit"] || "100";
+    var metascoreParam = request.query["metascore"] || "0";
+    try {
+        console.log(`📽️  searching must-watch movies...`);
+        const movies = await database.getMoviesMetascoreLimit(parseInt(metascoreParam), parseInt(limitParam));
         console.log("operation completed");
         response.send(JSON.stringify(movies, null, 2));
     } catch (e) {
         console.error(e);
         response.send("an error occured");
     }
-});
+}
 
 
 app.listen(PORT);

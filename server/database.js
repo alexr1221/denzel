@@ -64,3 +64,24 @@ module.exports.getMovies = async (idArray) => {
         });
     });
 };
+
+module.exports.getMoviesMetascoreLimit = async (metascore, limit) => {
+    return new Promise((success, failed) => {
+        mongo.connect("mongodb+srv://alex:mongom@ddenzel-pwqvc.azure.mongodb.net/", function (err, db) {
+            if (err) failed(err);
+            var dbo = db.db("ddenzel");
+            try {
+                console.log("trying find...");
+                dbo.collection("movies").find({ "metascore": { $gte: metascore } }).sort({ "metascore": -1 }).limit(limit).toArray(function (err, res) {
+                    if (err) throw err;
+                    db.close();
+                    success(res);
+                });
+            }
+            catch (e) {
+                console.log(e);
+                failed(e)
+            }
+        });
+    });
+};
