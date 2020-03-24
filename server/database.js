@@ -12,7 +12,7 @@ module.exports.populateDatabase = async docs => {
                     if (err) throw err;
                     console.log("Number of documents inserted: " + res.insertedCount);
                     db.close();
-                    success("Number of documents inserted: " + res.insertedCount);
+                    success({ total: res.insertedCount });
                 });
             }
             catch (e) {
@@ -76,6 +76,28 @@ module.exports.getMoviesMetascoreLimit = async (metascore, limit) => {
                     if (err) throw err;
                     db.close();
                     success(res);
+                });
+            }
+            catch (e) {
+                console.log(e);
+                failed(e)
+            }
+        });
+    });
+};
+
+module.exports.saveDateReview = async (data) => {
+    return new Promise((success, failed) => {
+        mongo.connect("mongodb+srv://alex:mongom@ddenzel-pwqvc.azure.mongodb.net/", function (err, db) {
+            if (err) failed(err);
+            var dbo = db.db("ddenzel");
+            try {
+                console.log("trying find...");
+                dbo.collection("movies").insertOne(data, function (err, res) {
+                    if (err) throw err;
+                    console.log("Number of documents inserted: " + res.insertedCount);
+                    db.close();
+                    success({ _id: res.insertedId });
                 });
             }
             catch (e) {

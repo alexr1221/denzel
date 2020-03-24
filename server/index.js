@@ -34,7 +34,7 @@ app.get('/movies/populate/:id', async (request, response) => {
         //    console.log(`🥇 ${awesome.length} awesome movies found.`);
         //    console.log(JSON.stringify(awesome, null, 2));
         console.log("operation completed")
-        response.send(db_result_message);
+        response.send(JSON.stringify(db_result_message, null, 2));
     } catch (e) {
         console.error(e);
         response.send("an error occured");
@@ -92,6 +92,21 @@ async function searchEndpoint(request, response) {
         response.send("an error occured");
     }
 }
+
+
+app.post('/movies/:id', async (request, response) => {
+    var id = request.params.id;
+    try {
+        console.log(`📽️  fetching random must-watch movie...`);
+        const obj = { movie_id: id, date: request.body.date, review: request.body.review };
+        var database_result_message = await database.saveDateReview(obj);
+        console.log("operation completed");
+        response.send(JSON.stringify(database_result_message, null, 2));
+    } catch (e) {
+        console.error(e);
+        response.send("an error occured");
+    }
+});
 
 
 app.listen(PORT);
