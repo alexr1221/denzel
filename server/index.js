@@ -19,8 +19,8 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
-app.get('/movies/populate', async (request, response) => {
-    var actor_id = request.query["id"];
+app.get('/movies/populate/:id', async (request, response) => {
+    var actor_id = request.params.id;
     console.log(actor_id);
 
 
@@ -43,7 +43,6 @@ app.get('/movies/populate', async (request, response) => {
 
 app.get('/movies', async (request, response) => {
     var metascore = 70;
-
     try {
         console.log(`📽️  fetching random must-watch movie...`);
         const movies = await database.getAllMovies();
@@ -57,6 +56,21 @@ app.get('/movies', async (request, response) => {
         response.send("an error occured");
     }
 });
+
+app.get('/movies/:id', async (request, response) => {
+    var metascore = 70;
+    var requestParam = request.params.id;
+    try {
+        console.log(`📽️  fetching random must-watch movie...`);
+        const movies = await database.getMovies([requestParam]);
+        console.log("operation completed");
+        response.send(JSON.stringify(movies, null, 2));
+    } catch (e) {
+        console.error(e);
+        response.send("an error occured");
+    }
+});
+
 
 app.listen(PORT);
 console.log(`📡 Running on port ${PORT}`);
