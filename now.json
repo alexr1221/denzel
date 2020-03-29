@@ -1,4 +1,48 @@
 {
-  "version": 2,
-  "alias": "esilv-denzel"
+	"version": 2,
+	"alias": "alex-esilv-denzel",
+	"builds": [
+		{
+			"src": "index.js",
+			"use": "@now/node"
+		},
+		{
+			"src": "imdb.js",
+			"use": "@now/node"
+		},
+		{
+			"src": "constants.js",
+			"use": "@now/node"
+		},
+		{
+			"src": "database.js",
+			"use": "@now/node"
+		}
+	],
+	"routes": [
+		{
+			"src": "/movies",
+			"methods": [ "GET" ],
+			"headers": { "Content-Type": "application/json" },
+			"dest": "index.js"
+		},
+		{
+			"src": "/movies/(?<id>.+)$",
+			"methods": [ "GET" ],
+			"headers": { "Content-Type": "application/json" },
+			"dest": "index.js"
+		},
+		{
+			"src": "/movies/search/(?<limit><metascore>[^/]+)$",
+			"methods": [ "GET" ],
+			"headers": { "Content-Type": "application/json" },
+			"dest": "index.js"
+		},
+		{
+			"src": "/movies/(?<id>.+)$",
+			"methods": [ "POST" ],
+			"headers": { "Content-Type": "application/json" },
+			"dest": "index.js"
+		}
+	]
 }

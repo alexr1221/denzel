@@ -50,6 +50,7 @@ app.get('/movies', async (request, response) => {
         var random_index = Math.floor(Math.random() * mustwatches.length);
         var rdm_mustwatch = mustwatches[random_index];
         console.log("operation completed");
+        response.contentType('json');
         response.send(JSON.stringify(rdm_mustwatch, null, 2));
     } catch (e) {
         console.error(e);
@@ -67,6 +68,7 @@ app.get('/movies/:id', async (request, response) => {
             console.log(`📽️  searching for specific movie...`);
             const movies = await database.getMovies([requestParam]);
             console.log("operation completed");
+            response.contentType('json');
             response.send(JSON.stringify(movies, null, 2));
         }
     } catch (e) {
@@ -86,6 +88,7 @@ async function searchEndpoint(request, response) {
         console.log(`📽️  searching must-watch movies...`);
         const movies = await database.getMoviesMetascoreLimit(parseInt(metascoreParam), parseInt(limitParam));
         console.log("operation completed");
+        response.contentType('json');
         response.send(JSON.stringify(movies, null, 2));
     } catch (e) {
         console.error(e);
@@ -101,6 +104,7 @@ app.post('/movies/:id', async (request, response) => {
         const obj = { movie_id: id, date: request.body.date, review: request.body.review };
         var database_result_message = await database.saveDateReview(obj);
         console.log("operation completed");
+        response.contentType('json');
         response.send(JSON.stringify(database_result_message, null, 2));
     } catch (e) {
         console.error(e);
