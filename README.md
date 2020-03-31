@@ -3,7 +3,7 @@
 - Frontend app link: https://denzel-app.alexr1221.now.sh/
 - Server API link: https://denzel-server.alexr1221.now.sh
 
-Screenshots:
+Frontend screenshots:
 
 ![Random](./img/CaptureDemoRandom.PNG)
 ![Search](./img/CaptureMovieSearch.PNG)
