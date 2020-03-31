@@ -47,7 +47,7 @@ export const MovieSearch = (props) => {
                 <TabPane tabId="0">
                     <Row>
                         <Col sm="12">
-                            <h4 className="pb-3">Here is</h4>
+                            <h4 className="pb-3">Here is your movie</h4>
                             <MovieRandom />
                         </Col>
                     </Row>

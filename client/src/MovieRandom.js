@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Badge, Media } from 'reactstrap';
 //import BibRestaurantData from './data/allRestaurantsJoin.json';
 
+var isFetching = true;
 var failedFetch = false;
 class MovieRandom extends Component {
 
@@ -12,7 +13,8 @@ class MovieRandom extends Component {
             .then((data) => {
                 this.movi = data
                 console.log(this.movi)
-            }).catch((err) => failedFetch = true)
+                isFetching = false
+            }).catch((err) => { failedFetch = true; isFetching = false; })
     }
 
     render() {
@@ -20,12 +22,20 @@ class MovieRandom extends Component {
         return (
             <div className="container">
                 <div className="col-xs-12">
-                    <h4>
+                    <h5>
+                        {
+                            isFetching &&
+                            <span>
+                                Retrieving data...
+                            </span>
+                        }
                         {
                             failedFetch &&
-                        <span>
-                            Failed to get data
-                </span>}</h4>
+                            <span>
+                                Failed to get data
+                            </span>
+                        }
+                    </h5>
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title">{this.movi.title}  {this.movi.metascore >= 70 &&
