@@ -4,7 +4,6 @@ import './App.css';
 import { Button, Container } from 'reactstrap';
 import { MovieNavBar } from './MovieNavBar';
 import  MovieSearch  from './MovieSearch';
-import { getAllMovies } from './ApiClient';
 
 class App extends Component {
 
