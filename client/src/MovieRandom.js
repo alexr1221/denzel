@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Badge, Media } from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Badge, Media, Button } from 'reactstrap';
 //import BibRestaurantData from './data/allRestaurantsJoin.json';
 
 var isFetching = true;
@@ -48,9 +48,16 @@ class MovieRandom extends Component {
 
                                     </span>
                                 }</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                {this.movi.synopsis}
-                            </h6>
+                            <Media className="mt-1" object src={this.movi.poster} />
+                            <Media body>
+                                <Media heading>
+                                </Media>
+                                <h6 className="card-subtitle mt-4 text-muted">
+
+                                    {this.movi.synopsis}
+                                </h6>
+                            </Media>
+
                         </div>
                     </div>
                 </div>
