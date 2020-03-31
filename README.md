@@ -1,11 +1,12 @@
 # DENZEL
 
-Frontend app link: https://denzel-app.alexr1221.now.sh/
-Server API link: https://denzel-server.alexr1221.now.sh
+- Frontend app link: https://denzel-app.alexr1221.now.sh/
+- Server API link: https://denzel-server.alexr1221.now.sh
 
 Frontend showcase:
-![Random](./img/CaptureDemoRandom.PNG)
+
 ![Search](./img/CaptureMovieSearch.PNG)
+![Random](./img/CaptureDemoRandom.PNG)
 
 
 > The must-watch Denzel's movies
